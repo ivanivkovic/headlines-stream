@@ -3,8 +3,8 @@ import requests, json, math, os, time
 url = "https://newscatcher.p.rapidapi.com/v1/latest_headlines"
 
 requests_per_hour = 21
-#seconds_apart = math.floor(60 * 60 / 21)
-seconds_apart = 15 
+seconds_apart = math.floor(60 * 60 / requests_per_hour)
+#seconds_apart = 15 
 
 querystring = {
         "lang":"en",
@@ -12,8 +12,8 @@ querystring = {
 }
 
 headers = {
-            'x-rapidapi-key': "556609e07emsh42b7bba41bc0146p11420cjsnfd72f6caa630",
-            'x-rapidapi-host': "newscatcher.p.rapidapi.com"
+    'x-rapidapi-key': "556609e07emsh42b7bba41bc0146p11420cjsnfd72f6caa630",
+    'x-rapidapi-host': "newscatcher.p.rapidapi.com"
 }
 
 
