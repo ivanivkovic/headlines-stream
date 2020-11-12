@@ -11,13 +11,13 @@ querystring = {
         "media": "True"
 }
 
+if len(sys.argv) > 1:
+    querystring['topic'] = sys.argv[1]
+
 headers = {
     'x-rapidapi-key': "556609e07emsh42b7bba41bc0146p11420cjsnfd72f6caa630",
     'x-rapidapi-host': "newscatcher.p.rapidapi.com"
 }
-
-if len(sys.argv) > 1:
-    querystring['topic'] = sys.argv[1]
 
 while(True):
 
