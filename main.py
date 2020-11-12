@@ -1,14 +1,14 @@
-import requests, json, math, os, time
+import requests, json, math, os, time, sys
 
 url = "https://newscatcher.p.rapidapi.com/v1/latest_headlines"
 
 requests_per_hour = 21
-seconds_apart = math.floor(60 * 60 / requests_per_hour)
+seconds_apart = math.floor(3600 / requests_per_hour)
 #seconds_apart = 15 
 
 querystring = {
-        "lang":"en",
-        "media":"True"
+        "lang": "en",
+        "media": "True"
 }
 
 headers = {
@@ -16,6 +16,8 @@ headers = {
     'x-rapidapi-host': "newscatcher.p.rapidapi.com"
 }
 
+if len(sys.argv) > 1:
+    querystring['topic'] = sys.argv[1]
 
 while(True):
 
