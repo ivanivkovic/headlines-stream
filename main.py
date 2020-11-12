@@ -1,10 +1,10 @@
-import requests, json, math
-from time import sleep
+import requests, json, math, os, time
 
 url = "https://newscatcher.p.rapidapi.com/v1/latest_headlines"
 
 requests_per_hour = 21
-seconds_apart = math.floor(60 * 60 / 21)
+#seconds_apart = math.floor(60 * 60 / 21)
+seconds_apart = 15 
 
 querystring = {
         "lang":"en",
@@ -16,14 +16,20 @@ headers = {
             'x-rapidapi-host': "newscatcher.p.rapidapi.com"
 }
 
-response = requests.request("GET", url, headers=headers, params=querystring)
-json_object = json.loads(response.text)
 
 while(True):
-    if json_object['status'] == 'ok':
+
+    os.system('clear')
+
+    response = requests.request("GET", url, headers=headers, params=querystring)
+    
+    if response.status_code != 200:
+        print('Newscatcher status: ' + str(response.status_code))
+
+    else:
+        json_object = json.loads(response.text)
+    
         for article in json_object['articles']:
             print(article['published_date'] + ' ' + article['clean_url'] + ': ' + article['title'])
-    else:
-        print('Newscatcher status: ' + json_object['status'])
 
-    sleep(seconds_apart)
+    time.sleep(seconds_apart)
